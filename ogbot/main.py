@@ -5,7 +5,7 @@ import traceback
 
 from bot import OgameBot
 from config import Config
-from sms import SMSSender
+#from sms import SMSSender
 from scheduler import Scheduler
 from scraping import authentication
 
@@ -81,8 +81,8 @@ if not config.scheduler:
                 except Exception as e:
                     exception_message = traceback.format_exc()
                     logger.error(exception_message)
-                    sms_sender = SMSSender(config)
-                    sms_sender.send_sms(exception_message)
+                    #sms_sender = SMSSender(config)
+                    #sms_sender.send_sms(exception_message)
 
         if not config.loop:
             break

@@ -3,7 +3,7 @@ import logging
 
 from scraping import general
 from core import *
-import sms
+#import sms
 
 
 class OgameBot(object):
@@ -26,7 +26,7 @@ class OgameBot(object):
         self.messages_bot = messages.MessagesBot(browser, config, planets)
         self.researcher_bot = researcher.ResearcherBot(browser, config, planets)
         self.movement_bot = movement.MovementBot(browser, config, planets)
-        self.sms_sender = sms.SMSSender(config)
+        #self.sms_sender = sms.SMSSender(config)
 
     def print_resources(self):
         for planet in self.planets:
@@ -67,7 +67,7 @@ class OgameBot(object):
     def transport_resources_to_least_defended_planet(self):
         least_defended_planet = self.defender_bot.get_least_defended_planet()
         self.transporter_bot.transport_resources_to_planet(least_defended_planet)
-        self.sms_sender.send_sms("Transporting resources to least defended planet: %s" % least_defended_planet)
+        #self.sms_sender.send_sms("Transporting resources to least defended planet: %s" % least_defended_planet)
 
     def transport_resources_to_planet(self):
         self.transporter_bot.transport_resources_to_planet()
@@ -80,7 +80,7 @@ class OgameBot(object):
         else:
             self.transporter_bot.transport_resources_to_planet(least_developed_planet)
 
-        self.sms_sender.send_sms("Transporting resources to least developed planet: %s" % least_developed_planet)
+        #self.sms_sender.send_sms("Transporting resources to least developed planet: %s" % least_developed_planet)
 
     def auto_build_defenses(self):
         self.defender_bot.auto_build_defenses()

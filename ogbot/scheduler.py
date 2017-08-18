@@ -41,7 +41,7 @@ class Scheduler():
                         'enable': self.config.schedules['transport_resources_to_weaker_planet']['enable'],
                         'priority': 3,
                         'delay': self.config.schedules['transport_resources_to_weaker_planet']['delay'],
-                        'function': bot.transport_resources_to_weaker_planet
+                        'function': bot.transport_resources_to_least_developed_planet
                     },
                     'auto_build_defenses': {
                         'enable': self.config.schedules['auto_build_defenses']['enable'],

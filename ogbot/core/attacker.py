@@ -123,8 +123,8 @@ class AttackerBot(BaseBot):
 
 
         self.logger.info("Total predicted loot is %s" % int(predicted_loot))
-        self.sms_sender.send_sms("%d assault fleets were deployed, the predicted loot is %s"
-                                 % (assault_fleets_count, predicted_loot))
+        #self.sms_sender.send_sms("%d assault fleets were deployed, the predicted loot is %s"
+        #                         % (assault_fleets_count, predicted_loot))
         return True
 
     def auto_attack_inactive_planets(self):

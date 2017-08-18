@@ -23,8 +23,7 @@ class BuilderBot(BaseBot):
         :param planets: planets to search for, use all planets if None
         :return: planet object
         """
-
-        least_developed_planet = self.get_least_developed_planet()
+        least_developed_planet = self.get_least_developed_planet(planets)
 
         construction_mode = self.buildings_client.is_in_construction_mode(least_developed_planet)
         if construction_mode is False:
@@ -33,13 +32,14 @@ class BuilderBot(BaseBot):
         # If the least developed planet is in construction mode make a recursive call
         # looking for the second least developed planet
         planets = planets[:]
-        planets.remove(least_developed_planet)
+        if least_developed_planet in planets:
+            planets.remove(least_developed_planet)
 
         # If there is no more planets return None
         if not planets:
             return None
 
-        return self.get_planet_candidate_for_construction(planets)
+        return self.get_candidate_planet_for_construction(planets)
 
     def get_available_buildings_for_planet(self, planet):
         buildings = self.buildings_client.get_available_buildings_for_planet(planet)
@@ -203,14 +203,15 @@ class BuilderBot(BaseBot):
                     return True
 
                 self.buildings_client.build_structure(building, planet)
-                self.sms_sender.send_sms("Building %s on planet %s" % (building, planet))
+                #self.sms_sender.send_sms("Building %s on planet %s" % (building, planet))
             else:
                 self.logger.info("No available buildings on planet %s" % planet)
         else:
             self.logger.info("Planet is already in construction_mode: %s" % planet)
 
-    def get_least_developed_planet(self):
-        return min(self.planets, key=self.get_planet_building_total_lvl)
+    def get_least_developed_planet(self, planets=None):
+        planets = planets or self.planets
+        return min(planets, key=self.get_planet_building_total_lvl)
 
     def get_planet_building_total_lvl(self, planet):
         planet_buildings = self.buildings_client.get_buildings(planet)

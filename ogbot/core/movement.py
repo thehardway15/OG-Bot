@@ -28,7 +28,7 @@ class MovementBot(BaseBot):
 
                 self.logger.warning(move)
                 self.logger.warning('Incoming attack on planet %s, attempting fleet escape', move.destination_name)
-                self.sms_sender.send_sms(move)
+                #self.sms_sender.send_sms(move)
 
                 cTarget = move.destination_coords
                 target = self.get_player_planet_by_coordinates(cTarget)
